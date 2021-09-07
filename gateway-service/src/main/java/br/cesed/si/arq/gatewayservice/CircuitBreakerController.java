@@ -12,5 +12,10 @@ public class CircuitBreakerController {
 	public String ms01ServiceFallback() {
 		return "Fallback do Microservice 01";
 	}
+	
+	@GetMapping("/microservice02")
+	public String ms02ServiceFallback() {
+		return "Fallback do Microservice 02";
+	}
 
 }

@@ -10,12 +10,19 @@ spring:
         predicates:
         - Path=/ms01/**
         filters:
-        - RewritePath=/ms01/(?<path>.*), /$\{path}
         - AddRequestHeader=X-ms01-Header, microservice01-header
         - name: CircuitBreaker
           args:
             name: backendA
-            fallbackUri: forward:/fallback/microservice01        
+            fallbackUri: forward:/fallback/microservice01      - id: microservice-2
+        uri: lb://microservice02
+        predicates:
+        - Path=/ms02/**
+        filters:
+        - name: CircuitBreaker
+          args:
+            name: backendB
+            fallbackUri: forward:/fallback/microservice02        
 server:  port: 8088
 
 management:
