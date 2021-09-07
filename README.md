@@ -1,6 +1,6 @@
 # Arquitetura de Software - Sistemas de Informação | Unifacisa
 
-### Exemplo de Microservice utilizando Spring Cloud Gateway, Eureka (Service Discovery)  e Resiliance4j (Circuit Breaker)
+### Exemplo de Microservice utilizando Spring Cloud Gateway, Eureka (Service Discovery)  e Resilience4j (Circuit Breaker)
 
 ##### Exemplos utilizados
 
