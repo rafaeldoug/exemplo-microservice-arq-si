@@ -2,6 +2,10 @@
 
 ### Exemplo de Microservice utilizando Spring Cloud Gateway, Eureka (Service Discovery)  e Resilience4j (Circuit Breaker)
 
+#### Pré requisito
+* Maven 3
+* Java 11
+
 ##### Exemplos utilizados
 
 * [devglan - Spring Cloud Gateway Example](https://www.devglan.com/spring-cloud/spring-cloud-gateway-example)
