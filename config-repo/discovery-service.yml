@@ -1,14 +1,9 @@
 eureka:
-  instance:
-    hostname: localhost
   client:
     eureka-server-connect-timeout-seconds: 5
     enabled: true
     fetch-registry: false
     register-with-eureka: false
-  serviceUrl:
-    defaultZone: http://localhost:${server.port}/eureka
 
 server:
   port: 8761
-  
