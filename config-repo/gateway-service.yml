@@ -1,0 +1,67 @@
+spring:
+  cloud:
+    gateway:
+      routes:        
+      - id: produtos
+        uri: lb://produtos
+        predicates:
+        - Path=/produtos/**
+      - id: microservice-1
+        uri: lb://microservice01
+        predicates:
+        - Path=/ms01/**
+        filters:
+        - AddRequestHeader=X-ms01-Header, microservice01-header
+        - name: CircuitBreaker
+          args:
+            name: backendA
+            fallbackUri: forward:/fallback/microservice01
+      - id: microservice-2
+        uri: lb://microservice02
+        predicates:
+        - Path=/ms02/**
+        filters:
+        - name: CircuitBreaker
+          args:
+            name: backendB
+            fallbackUri: forward:/fallback/microservice02
+        
+server:
+  port: 8088
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+        - '*'
+  endpoint:
+    health:
+      show-details: always
+
+resilience4j.circuitbreaker:
+  configs:
+    default:
+      register-health-indicator: true
+      sliding-window-size: 10
+      sliding-window-type: COUNT_BASED
+      minimum-number-of-calls: 5
+      writable-stack-trace-enabled: true     
+      permitted-number-of-calls-in-half-open-state: 2
+      automatic-transition-from-open-to-half-open-enabled: true
+      wait-duration-in-open-state: 10s
+      failure-rate-threshold: 50
+  instances:
+    backendA:
+      baseConfig: default
+
+    backendB:
+      register-health-indicator: true
+      sliding-window-size: 10
+      sliding-window-type: COUNT_BASED
+      minimum-number-of-calls: 5
+      writable-stack-trace-enabled: true     
+      permitted-number-of-calls-in-half-open-state: 2
+      automatic-transition-from-open-to-half-open-enabled: true
+      wait-duration-in-open-state: 10s
+      failure-rate-threshold: 50

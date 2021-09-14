@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: microservice02
+  cloud:
+    config:
+      uri: http://localhost:8888
