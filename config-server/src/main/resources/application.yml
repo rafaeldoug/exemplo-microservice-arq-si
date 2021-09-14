@@ -6,6 +6,6 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/rafaeldoug/exemplo-microservice-arq-si/config-repo
-          basedir: target/config
+          search-paths:          - config-repo          
+          uri: https://github.com/rafaeldoug/exemplo-microservice-arq-si/
           default-label: main
